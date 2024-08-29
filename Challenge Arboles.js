@@ -35,7 +35,16 @@ const printInOrder = (person) => {
     person.children.slice(mid).forEach(printInOrder);
 };
 
-// Ejemplo de uso
+const calculateHeight = (person) => {
+    if (!person) return 0;
+
+    if (person.children.length === 0) return 1;
+
+    const heights = person.children.map(child => calculateHeight(child));
+    return Math.max(...heights) + 1;
+};
+
+
 const grandfather = new Person("Michael Jordan", "01-01-1940");
 const father = new Person("Rachel Jordan", "01-01-1970");
 const child1 = new Person("Nicolas Jordan", "01-01-2000");
@@ -53,3 +62,6 @@ printPostOrder(grandfather);
 
 console.log("\nIn-order:");
 printInOrder(grandfather);
+
+console.log("\nHeight of the tree:");
+console.log(calculateHeight(grandfather));
